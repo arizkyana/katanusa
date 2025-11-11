@@ -1,0 +1,9 @@
+{
+  "name": "Nusadaya",
+  "description": "A web application to connect users with Indonesian cultural experts. Users can chat with an AI assistant that impersonates the expert or book a premium consultation with the real expert.",
+  "requestFramePermissions": [
+    "microphone",
+    "camera",
+    "display-capture"
+  ]
+}
