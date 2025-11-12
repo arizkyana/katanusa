@@ -12,7 +12,7 @@ const ChatModal: React.FC<ChatModalProps> = ({ expert, onClose }) => {
   const [messages, setMessages] = useState<ChatMessage[]>([
     {
       sender: 'ai',
-      text: `Selamat datang di Nusadaya! Saya adalah asisten AI dari ${expert.name}. Ada yang bisa saya bantu terkait budaya Indonesia?`
+      text: `Selamat datang di KataNusa! Saya adalah asisten AI dari ${expert.name}. Ada yang bisa saya bantu terkait budaya Indonesia?`
     }
   ]);
   const [userInput, setUserInput] = useState('');
@@ -58,7 +58,7 @@ const ChatModal: React.FC<ChatModalProps> = ({ expert, onClose }) => {
                     <span className="absolute bottom-0 right-0 block h-3 w-3 rounded-full bg-green-500 border-2 border-white"></span>
                 </div>
                 <div className="ml-3">
-                    <h3 className="font-bold text-lg">Asisten AI Nusadaya</h3>
+                    <h3 className="font-bold text-lg">Asisten AI KataNusa</h3>
                     <p className="text-sm text-green-600">Online</p>
                 </div>
             </div>

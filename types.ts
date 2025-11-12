@@ -7,6 +7,7 @@ export interface Expert {
   avatarUrl: string;
   bio: string;
   specialties: string[];
+  gender: 'Pria' | 'Wanita' | 'Netral';
 }
 
 export interface ChatMessage {

@@ -312,11 +312,21 @@ const ChatPage: React.FC = () => {
             },
             onerror: (e: ErrorEvent) => {
                 console.error('Session error:', e);
-                alert('Terjadi kesalahan koneksi saat panggilan. Panggilan diakhiri.');
+                
+                let alertMessage = 'Terjadi kesalahan koneksi saat panggilan. Panggilan diakhiri.';
+                const errorMessage = e.message?.toLowerCase() || '';
+
+                if (errorMessage.includes("requested entity was not found")) {
+                    alertMessage = "Kunci API yang Anda pilih tidak valid atau telah dicabut. Silakan klik tombol panggil lagi untuk memilih kunci API yang lain.";
+                } else if (errorMessage.includes("network error")) {
+                    alertMessage = 'Terjadi kesalahan jaringan. Periksa koneksi internet Anda. Jika masalah berlanjut, coba pilih kembali kunci API Anda dengan mengklik tombol panggil lagi.';
+                }
+                
+                alert(alertMessage);
                 endCall();
             },
         };
-
+        
         sessionPromiseRef.current = startAiCallSession(expert, callbacks);
         await sessionPromiseRef.current; 
     } catch (error) {

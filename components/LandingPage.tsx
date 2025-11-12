@@ -39,12 +39,12 @@ const LandingPage: React.FC<LandingPageProps> = ({ experts }) => {
       <section className="py-20">
         <div className="container mx-auto px-6 grid md:grid-cols-2 gap-12 items-center">
             <div className="p-8 bg-white rounded-lg shadow-md">
-                <img src="https://i.ibb.co/3k5fH0k/plant.png" alt="Potted Plant" className="w-full h-auto object-cover rounded"/>
+                <img src="https://i.ibb.co/M8VzQ1r/monstera-plant.png" alt="Potted Plant" className="w-full h-auto object-cover rounded"/>
             </div>
             <div>
-                <h2 className="text-3xl font-bold text-gray-800">Selamat Datang di Nusadaya</h2>
+                <h2 className="text-3xl font-bold text-gray-800">Selamat Datang di KataNusa</h2>
                 <p className="mt-4 text-gray-600 leading-relaxed">
-                    Nusadaya adalah jembatan digital Anda menuju kekayaan budaya Indonesia. Kami menghubungkan Anda dengan para pakar terkemuka di berbagai bidang, mulai dari tarian, kuliner, filsafat hidup, hingga seni pertunjukan. Misi kami adalah meneruskan warisan keahlian kepada generasi masa kini dan mendatang.
+                    KataNusa adalah jembatan digital Anda menuju kekayaan budaya Indonesia. Kami menghubungkan Anda dengan para pakar terkemuka di berbagai bidang, mulai dari tarian, kuliner, filsafat hidup, hingga seni pertunjukan. Misi kami adalah meneruskan warisan keahlian kepada generasi masa kini dan mendatang.
                 </p>
                 <a href="#" className="mt-6 inline-block text-[#2A754B] font-semibold hover:underline">Pelajari Lebih Lanjut &rarr;</a>
             </div>
@@ -104,7 +104,7 @@ const LandingPage: React.FC<LandingPageProps> = ({ experts }) => {
           <h2 className="text-3xl font-bold text-gray-800">Apa Kata Mereka?</h2>
           <div className="mt-12 grid md:grid-cols-2 gap-8 max-w-4xl mx-auto">
             <div className="bg-[#F9FAF5] p-8 rounded-lg text-left">
-              <p className="text-gray-600 italic">"Nusadaya membuka wawasan saya tentang budaya Sunda yang sebelumnya tidak pernah saya ketahui. Platform yang luar biasa!"</p>
+              <p className="text-gray-600 italic">"KataNusa membuka wawasan saya tentang budaya Sunda yang sebelumnya tidak pernah saya ketahui. Platform yang luar biasa!"</p>
               <div className="flex items-center mt-4">
                 <img src="https://picsum.photos/seed/rina/50" alt="Rina" className="w-12 h-12 rounded-full object-cover"/>
                 <div className="ml-4">
@@ -114,7 +114,7 @@ const LandingPage: React.FC<LandingPageProps> = ({ experts }) => {
               </div>
             </div>
             <div className="bg-[#F9FAF5] p-8 rounded-lg text-left">
-              <p className="text-gray-600 italic">"Sebagai seorang peneliti, menemukan narasumber yang kredibel itu sulit. Nusadaya sangat membantu pekerjaan saya. Terima kasih."</p>
+              <p className="text-gray-600 italic">"Sebagai seorang peneliti, menemukan narasumber yang kredibel itu sulit. KataNusa sangat membantu pekerjaan saya. Terima kasih."</p>
               <div className="flex items-center mt-4">
                 <img src="https://picsum.photos/seed/andra/50" alt="Andra" className="w-12 h-12 rounded-full object-cover"/>
                 <div className="ml-4">
@@ -132,7 +132,7 @@ const LandingPage: React.FC<LandingPageProps> = ({ experts }) => {
         <div className="container mx-auto px-6 text-center">
             <h2 className="text-3xl font-bold text-gray-800">Siap Menjelajahi Budaya Indonesia?</h2>
             <p className="mt-4 text-gray-600 max-w-2xl mx-auto">
-                Bergabunglah dengan komunitas kami. Baik Anda seorang pelajar, pencari ilmu atau seorang pakar, Nusadaya adalah tempatnya.
+                Bergabunglah dengan komunitas kami. Baik Anda seorang pelajar, pencari ilmu atau seorang pakar, KataNusa adalah tempatnya.
             </p>
             <div className="mt-8 flex justify-center space-x-4">
                 <button className="bg-[#2A754B] text-white px-8 py-3 rounded-full font-semibold text-lg hover:bg-opacity-90 transition-all shadow-lg">

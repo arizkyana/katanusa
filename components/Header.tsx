@@ -6,7 +6,7 @@ const Header: React.FC = () => {
     <header className="bg-white/80 backdrop-blur-md sticky top-0 z-40 shadow-sm">
       <div className="container mx-auto px-6 py-4 flex justify-between items-center">
         <Link to="/" className="text-2xl font-bold text-[#2A754B]">
-          Nusadaya
+          KataNusa
         </Link>
         <nav className="hidden md:flex items-center space-x-8">
           <Link to="/" className="text-gray-600 hover:text-[#2A754B] transition-colors">Beranda</Link>

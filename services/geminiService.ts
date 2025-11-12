@@ -62,6 +62,10 @@ export const startAiCallSession = (expert: Expert, callbacks: AiCallCallbacks) =
   
   const ai = new GoogleGenAI({ apiKey: API_KEY });
 
+  // FIX: Use 'Puck' for male voice as 'Zephyr' may not be functioning as expected.
+  // 'Puck' is an explicitly documented male-sounding voice. 'Kore' is female.
+  const voiceName = expert.gender === 'Pria' ? 'Puck' : 'Kore';
+
   const systemInstruction = `Anda adalah Asisten AI dari ${expert.name}, seorang ${expert.title}. ${expert.bio}. Anda harus selalu berbicara sebagai ${expert.name} (gunakan sudut pandang orang pertama "saya"). Anda sedang dalam panggilan suara dan video langsung. Jawab pertanyaan pengguna dengan ramah dan informatif, sesuai keahlian Anda (${expert.specialties.join(', ')}). Pengguna mungkin akan membagikan kamera atau layar mereka; berikan bantuan berdasarkan apa yang Anda lihat. Jangan pernah mengungkapkan bahwa Anda adalah AI.`;
 
   const sessionPromise = ai.live.connect({
@@ -72,6 +76,9 @@ export const startAiCallSession = (expert: Expert, callbacks: AiCallCallbacks) =
       inputAudioTranscription: {},
       outputAudioTranscription: {},
       systemInstruction,
+      speechConfig: {
+        voiceConfig: { prebuiltVoiceConfig: { voiceName } },
+      },
     },
   });
 
