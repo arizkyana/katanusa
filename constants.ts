@@ -206,55 +206,63 @@ const femaleAvatar1 = 'https://i.ibb.co/3cq2V2z/sundanese-woman.png';
 const maleAvatar2 = 'https://i.ibb.co/2K4tTq4/malay-man.png';
 const femaleAvatar2 = 'https://i.ibb.co/nMSJzJt/minang-woman.png';
 
+const getAvatarByGender = (gender: "Pria" | "Wanita") => {
+    switch(gender) {
+        case "Wanita": return '/public/images/sunda-ambu-pangeusi.png';
+        default:
+            return '/public/images/jawa-ki-waskita.png';
+    }
+}
+
 
 // Previous expert data to preserve IDs, avatars, and specialties for quality.
 const legacyExpertData: Pick<Expert, 'id' | 'name' | 'avatarUrl' | 'specialties'>[] = [
   {
     id: 'ki-waskita',
     name: 'Ki Waskita',
-    avatarUrl: maleAvatar1,
+    avatarUrl: getAvatarByGender('Pria'),
     specialties: ['Filosofi Jawa', 'Tata Krama', 'Sastra Kuno', 'Kebijaksanaan'],
   },
   {
     id: 'ambu-pangeusi',
     name: 'Ambu Pangeusi',
-    avatarUrl: femaleAvatar1,
+    avatarUrl: getAvatarByGender('Wanita'),
     specialties: ['Adat Sunda', 'Kearifan Lokal', 'Sastra Lisan', 'Mengayomi'],
   },
   {
     id: 'tuan-pustaka',
     name: 'Tuan Pustaka',
-    avatarUrl: maleAvatar2,
+    avatarUrl: getAvatarByGender('Pria'),
     specialties: ['Sastra Melayu', 'Pantun', 'Sejarah Maritim', 'Adab'],
   },
   {
     id: 'oppung-hasian',
     name: 'Oppung Hasian',
-    avatarUrl: femaleAvatar1,
+    avatarUrl: getAvatarByGender('Wanita'),
     specialties: ['Tarombo (Silsilah)', 'Adat Perkawinan', 'Falsafah Batak', 'Kekerabatan'],
   },
   {
     id: 'ra-tretan',
     name: 'Ra Tretan',
-    avatarUrl: maleAvatar1,
+    avatarUrl: getAvatarByGender('Pria'),
     specialties: ['Etos Kerja', 'Tradisi Carok', 'Budaya Pesisir', 'Persaudaraan'],
   },
   {
     id: 'encang-jago',
     name: 'Encang Jago',
-    avatarUrl: maleAvatar2,
+    avatarUrl: getAvatarByGender('Pria'),
     specialties: ['Dialek Betawi', 'Lenong', 'Ondel-Ondel', 'Humor Betawi'],
   },
   {
     id: 'bundo-cadiak',
     name: 'Bundo Cadiak',
-    avatarUrl: femaleAvatar2,
+    avatarUrl: getAvatarByGender('Wanita'),
     specialties: ['Adat Matrilineal', 'Filosofi Merantau', 'Pepatah-Petitih', 'Kuliner Rendang'],
   },
   {
     id: 'datu-lontara',
     name: 'Datu Lontara',
-    avatarUrl: maleAvatar1,
+    avatarUrl: getAvatarByGender('Pria'),
     specialties: ['Aksara Lontara', 'Siri Na Pacce', 'Pelayaran', 'Navigasi Tradisional'],
   },
   {

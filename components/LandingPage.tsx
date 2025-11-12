@@ -39,7 +39,7 @@ const LandingPage: React.FC<LandingPageProps> = ({ experts }) => {
       <section className="py-20">
         <div className="container mx-auto px-6 grid md:grid-cols-2 gap-12 items-center">
             <div className="p-8 bg-white rounded-lg shadow-md">
-                <img src="https://i.ibb.co/M8VzQ1r/monstera-plant.png" alt="Potted Plant" className="w-full h-auto object-cover rounded"/>
+                <img src="/public/images/hero-banner.png" alt="Potted Plant" className="w-full h-auto object-cover rounded"/>
             </div>
             <div>
                 <h2 className="text-3xl font-bold text-gray-800">Selamat Datang di KataNusa</h2>
@@ -50,7 +50,7 @@ const LandingPage: React.FC<LandingPageProps> = ({ experts }) => {
             </div>
         </div>
       </section>
-      
+
       {/* Experts Section */}
       <section className="py-20 bg-white">
         <div className="container mx-auto px-6 text-center">
@@ -97,7 +97,7 @@ const LandingPage: React.FC<LandingPageProps> = ({ experts }) => {
           </div>
         </div>
       </section>
-      
+
       {/* Testimonials Section */}
       <section className="py-20 bg-white">
         <div className="container mx-auto px-6 text-center">

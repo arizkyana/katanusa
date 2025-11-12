@@ -81,7 +81,7 @@ const FRAME_RATE = 5; // Send 5 frames per second
 const ChatPage: React.FC = () => {
   const { expertId } = useParams<{ expertId: string }>();
   const expert = EXPERTS.find(e => e.id === expertId);
-  
+
   const [messages, setMessages] = useState<ChatMessage[]>([]);
   const [userInput, setUserInput] = useState('');
   const [isLoading, setIsLoading] = useState(false);
@@ -91,9 +91,9 @@ const ChatPage: React.FC = () => {
   const [liveTranscript, setLiveTranscript] = useState<TranscriptEntry[]>([]);
   const [isVideoEnabled, setIsVideoEnabled] = useState(false);
   const [isScreenSharing, setIsScreenSharing] = useState(false);
-  
+
   const chatContainerRef = useRef<HTMLDivElement>(null);
-  
+
   // Refs for call management
   const sessionPromiseRef = useRef<Promise<any> | null>(null);
   const mediaStreamRef = useRef<MediaStream | null>(null);
@@ -124,7 +124,7 @@ const ChatPage: React.FC = () => {
       chatContainerRef.current.scrollTop = chatContainerRef.current.scrollHeight;
     }
   }, [messages, isLoading, liveTranscript]);
-  
+
   const handleUserSubmit = async (e: FormEvent) => {
     e.preventDefault();
     if (!expert) return;
@@ -146,14 +146,14 @@ const ChatPage: React.FC = () => {
         setIsLoading(false);
     }
   };
-  
+
   const startFrameCapture = () => {
     if (frameIntervalRef.current) {
         window.clearInterval(frameIntervalRef.current);
     }
     frameIntervalRef.current = window.setInterval(() => {
         if (!videoRef.current || !canvasRef.current || !sessionPromiseRef.current) return;
-        
+
         const video = videoRef.current;
         const canvas = canvasRef.current;
         const ctx = canvas.getContext('2d');
@@ -193,42 +193,42 @@ const ChatPage: React.FC = () => {
   const endCall = async () => {
     setCallStatus(currentStatus => {
       if (currentStatus === 'idle') return 'idle';
-      
+
       console.log('Ending call...');
       stopVideoStream();
-      
+
       if (sessionPromiseRef.current) {
         sessionPromiseRef.current
           .then(session => session.close())
           .catch(e => console.warn("Session might have already failed to connect:", e));
       }
-      
+
       mediaStreamRef.current?.getTracks().forEach(track => track.stop());
       scriptProcessorRef.current?.disconnect();
-      
+
       if (inputAudioContextRef.current?.state !== 'closed') inputAudioContextRef.current?.close();
       if (outputAudioContextRef.current?.state !== 'closed') outputAudioContextRef.current?.close();
-      
+
       audioSourcesRef.current.forEach(source => source.stop());
       audioSourcesRef.current.clear();
-      
+
       mediaStreamRef.current = null;
       sessionPromiseRef.current = null;
       inputAudioContextRef.current = null;
       outputAudioContextRef.current = null;
       scriptProcessorRef.current = null;
-      
+
       if (liveTranscript.length > 0) {
         const transcriptText = liveTranscript
           .map(entry => `${entry.speaker === 'user' ? 'Anda' : 'AI'}: ${entry.text}`)
           .join('\n');
-        
+
         setMessages(prev => [
           ...prev,
           { sender: 'ai', text: `Berikut adalah transkrip panggilan suara:\n\n${transcriptText}` }
         ]);
       }
-      
+
       setLiveTranscript([]);
       return 'idle';
     });
@@ -293,14 +293,14 @@ const ChatPage: React.FC = () => {
                 if (base64Audio && outputAudioContextRef.current) {
                     const outputCtx = outputAudioContextRef.current;
                     nextAudioStartTimeRef.current = Math.max(nextAudioStartTimeRef.current, outputCtx.currentTime);
-                    
+
                     const audioBuffer = await decodeAudioData(decode(base64Audio), outputCtx, 24000, 1);
                     const source = outputCtx.createBufferSource();
                     source.buffer = audioBuffer;
                     source.connect(outputCtx.destination);
-                    
+
                     source.addEventListener('ended', () => { audioSourcesRef.current.delete(source); });
-                    
+
                     source.start(nextAudioStartTimeRef.current);
                     nextAudioStartTimeRef.current += audioBuffer.duration;
                     audioSourcesRef.current.add(source);
@@ -312,7 +312,7 @@ const ChatPage: React.FC = () => {
             },
             onerror: (e: ErrorEvent) => {
                 console.error('Session error:', e);
-                
+
                 let alertMessage = 'Terjadi kesalahan koneksi saat panggilan. Panggilan diakhiri.';
                 const errorMessage = e.message?.toLowerCase() || '';
 
@@ -321,17 +321,17 @@ const ChatPage: React.FC = () => {
                 } else if (errorMessage.includes("network error")) {
                     alertMessage = 'Terjadi kesalahan jaringan. Periksa koneksi internet Anda. Jika masalah berlanjut, coba pilih kembali kunci API Anda dengan mengklik tombol panggil lagi.';
                 }
-                
+
                 alert(alertMessage);
                 endCall();
             },
         };
-        
+
         sessionPromiseRef.current = startAiCallSession(expert, callbacks);
-        await sessionPromiseRef.current; 
+        await sessionPromiseRef.current;
     } catch (error) {
         console.error('Failed to start call:', error);
-        const errorMessage = (error as Error).message.includes("API_KEY") 
+        const errorMessage = (error as Error).message.includes("API_KEY")
             ? "Kunci API tidak ditemukan. Silakan pilih kunci API terlebih dahulu."
             : "Tidak dapat memulai panggilan. Pastikan izin mikrofon diberikan dan periksa koneksi Anda.";
         alert(errorMessage);
@@ -345,16 +345,16 @@ const ChatPage: React.FC = () => {
       return;
     }
 
-    if (!(window as any).aistudio) {
-        alert("Gagal memuat komponen API. Fitur panggilan tidak tersedia.");
-        return;
-    }
+    // if (!(window as any).aistudio) {
+    //     alert("Gagal memuat komponen API. Fitur panggilan tidak tersedia.");
+    //     return;
+    // }
 
     try {
-        const hasKey = await (window as any).aistudio.hasSelectedApiKey();
-        if (!hasKey) {
-            await (window as any).aistudio.openSelectKey();
-        }
+        // const hasKey = await (window as any).aistudio.hasSelectedApiKey();
+        // if (!hasKey) {
+        //     await (window as any).aistudio.openSelectKey();
+        // }
         await startCall();
     } catch (e) {
         console.error("API key selection was cancelled or failed:", e);
@@ -362,7 +362,7 @@ const ChatPage: React.FC = () => {
         setCallStatus('idle');
     }
   };
-  
+
     const startVideoStream = async (type: 'camera' | 'screen') => {
         stopVideoStream();
         try {
@@ -379,7 +379,7 @@ const ChatPage: React.FC = () => {
                     startFrameCapture();
                 };
             }
-            
+
             stream.getVideoTracks()[0].onended = () => {
                 stopVideoStream();
             };
@@ -421,7 +421,7 @@ const ChatPage: React.FC = () => {
   if (!expert) {
     return <div className="text-center py-20">Pakar tidak ditemukan atau halaman tidak valid.</div>;
   }
-  
+
   const getCallButtonClass = () => {
     switch(callStatus) {
       case 'connecting': return 'text-yellow-500 animate-pulse';
@@ -457,18 +457,18 @@ const ChatPage: React.FC = () => {
                 </div>
             </div>
             <div className="flex items-center space-x-2">
-                <button 
-                  onClick={handleVideoToggle} 
-                  disabled={callStatus !== 'active'} 
-                  className={`p-2 rounded-full transition-colors ${isVideoEnabled ? 'text-green-500' : 'text-gray-500'} disabled:text-gray-300 disabled:cursor-not-allowed`} 
+                <button
+                  onClick={handleVideoToggle}
+                  disabled={callStatus !== 'active'}
+                  className={`p-2 rounded-full transition-colors ${isVideoEnabled ? 'text-green-500' : 'text-gray-500'} disabled:text-gray-300 disabled:cursor-not-allowed`}
                   title="Bagikan Kamera"
                 >
                     <VideoIcon />
                 </button>
-                <button 
-                  onClick={handleScreenShareToggle} 
-                  disabled={callStatus !== 'active'} 
-                  className={`p-2 rounded-full transition-colors ${isScreenSharing ? 'text-green-500' : 'text-gray-500'} disabled:text-gray-300 disabled:cursor-not-allowed`} 
+                <button
+                  onClick={handleScreenShareToggle}
+                  disabled={callStatus !== 'active'}
+                  className={`p-2 rounded-full transition-colors ${isScreenSharing ? 'text-green-500' : 'text-gray-500'} disabled:text-gray-300 disabled:cursor-not-allowed`}
                   title="Bagikan Layar"
                 >
                     <ScreenShareIcon />
@@ -482,7 +482,7 @@ const ChatPage: React.FC = () => {
       </header>
 
       {/* Chat Body */}
-      <main 
+      <main
           ref={chatContainerRef}
           className="flex-grow overflow-y-auto bg-[#F7F4EB]"
           style={{backgroundImage: `url("data:image/svg+xml,%3Csvg width='6' height='6' viewBox='0 0 6 6' xmlns='http://www.w3.org/2000/svg'%3E%3Cg fill='%23d4d0c1' fill-opacity='0.4' fill-rule='evenodd'%3E%3Cpath d='M5 0h1L0 6V5zM6 5v1H5z'/%3E%3C/g%3E%3C/svg%3E")`}}
@@ -548,7 +548,7 @@ const ChatPage: React.FC = () => {
         <div className="container mx-auto px-6 py-4">
             {callStatus !== 'idle' ? (
                 <div className="text-center">
-                    <button 
+                    <button
                         onClick={endCall}
                         className="bg-red-600 text-white px-8 py-3 rounded-full font-semibold text-lg hover:bg-red-700 transition-all shadow-lg"
                     >
